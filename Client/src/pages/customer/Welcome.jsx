@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ArrowRight } from "lucide-react";
 const Welcome = () => {
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-5">
@@ -11,7 +11,7 @@ const Welcome = () => {
           </div>
 
           <h2 className="font-semibold text-gray-800 text-lg">
-            ABC Organization
+            ADDIS MESOB Organization
           </h2>
         </div>
 
@@ -32,14 +32,14 @@ const Welcome = () => {
         {/* Illustration */}
 
         <div className="my-10 flex justify-center">
-          <img src="/feedback.png" alt="Feedback" className="w-60" />
+          <img src="../public/feedbackImg.png" alt="Feedback" className="w-60" />
         </div>
 
         {/* Button */}
 
         <button className="w-full bg-blue-600 hover:bg-blue-700 duration-300 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2">
           Start Feedback
-          <ArrowRight size={18} />
+          {/* <ArrowRight size={24}/> */}
         </button>
 
         {/* Footer */}

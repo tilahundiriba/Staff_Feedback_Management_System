@@ -1,8 +1,6 @@
 
-
-
 import { Outlet } from "react-router-dom";
-import Footer from "../components/layout/Footer";
+// import Footer from "../components/layout/Footer";
 
 function CustomerLayout() {
   return (
@@ -15,19 +13,19 @@ function CustomerLayout() {
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-3">
 
           <img
-            src="/logo.png"
+            src="../public/ADDIS_MESOB.jpg"
             alt="Logo"
-            className="w-10 h-10"
+            className="w-10 h-10 rounded-full"
           />
 
           <div>
 
             <h1 className="font-bold text-lg">
-              ABC Organization
+              ADDIS MESOB Organization
             </h1>
 
             <p className="text-sm text-gray-500">
-              Staff Feedback System
+              Staff Feedback Management System
             </p>
 
           </div>
@@ -44,7 +42,7 @@ function CustomerLayout() {
 
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
 
     </div>
   );

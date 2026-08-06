@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import CustomerLayout from "./layouts/CustomerLayout";
-import AdminLayout from "./layouts/AdminLayout";
+import CustomerLayout from "./layouts/CustomerLayout.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
 
-import Welcome from "./pages/customer/Welcome";
-import CustomerInfo from "./pages/customer/CustomerInfo";
-import Dashboard from "./pages/admin/Dashboard";
+import Welcome from "./pages/customer/Welcome.jsx";
+import CustomerInfo from "./pages/customer/CustomerInfo.jsx";
+import Dashboard from "./pages/admin/Dashboard.jsx";
 function App() {
   return (
     <BrowserRouter>
