@@ -1,49 +1,113 @@
-
 import { Outlet } from "react-router-dom";
 // import Footer from "../components/layout/Footer";
 
 function CustomerLayout() {
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
-
+    <div className="w-full min-h-screen bg-slate-100 flex flex-col">
       {/* Header */}
 
-      <header className="bg-white shadow-sm">
+      <header className="bg-white shadow-sm flex items-center">
+        <div
+          className="
+            w-full
+            max-w-6xl
+            mx-auto
+            px-4
+            sm:px-6
+            lg:px-8
+            py-3
+            sm:py-4
+          "
+        >
+          <div
+            className="
+              flex
+              flex-col
+              sm:flex-row
+              items-center
+              justify-center
+              sm:justify-start
+              gap-2
+              sm:gap-4
+            "
+          >
+            <img
+              src="/ADDIS_MESOB.jpg"
+              alt="Addis Mesob Organization Logo"
+              className="
+                w-10 h-10
+                sm:w-11 sm:h-11
+                md:w-12 md:h-12
+                rounded-full
+                object-cover
+                flex-shrink-0
+              "
+            />
 
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-3">
-
-          <img
-            src="../public/ADDIS_MESOB.jpg"
-            alt="Logo"
-            className="w-10 h-10 rounded-full"
-          />
-
-          <div>
-
-            <h1 className="font-bold text-lg">
-              ADDIS MESOB Organization
-            </h1>
-
-            <p className="text-sm text-gray-500">
-              Staff Feedback Management System
-            </p>
-
+            <div
+              className="
+                flex
+                flex-col
+                sm:flex-row
+                items-center
+                sm:items-center
+                gap-0
+                sm:gap-3
+                text-center
+                sm:text-left
+              "
+            >
+              <h1
+                className="
+                  font-bold
+                  text-gray-800
+                  text-base
+                  sm:text-lg
+                  md:text-xl
+                  whitespace-nowrap
+                "
+              >
+                ADDIS MESOB Organization
+              </h1>
+              <span className="hidden sm:block text-gray-300">|</span>
+              <p
+                className="
+                  text-gray-500
+                  text-xs
+                  sm:text-sm
+                  md:text-base
+                "
+              >
+                Staff Feedback Management System
+              </p>
+            </div>
           </div>
-
         </div>
-
       </header>
 
       {/* Page */}
 
-      <main className="flex-1 flex items-center justify-center p-6">
-
-        <Outlet />
-
+      <main
+        className="
+          flex-1
+          w-full
+          flex
+          items-center
+          justify-center
+          px-4
+          py-6
+          sm:px-6
+          sm:py-8
+          md:px-8
+          lg:px-10
+        "
+      >
+        <div className="w-full max-w-6xl">
+          <Outlet />
+        </div>
       </main>
 
       {/* <Footer /> */}
-
     </div>
   );
 }

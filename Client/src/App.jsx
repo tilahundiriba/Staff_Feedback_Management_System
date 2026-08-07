@@ -7,6 +7,18 @@ import AdminLayout from "./layouts/AdminLayout.jsx";
 import Welcome from "./pages/customer/Welcome.jsx";
 import CustomerInfo from "./pages/customer/CustomerInfo.jsx";
 import Dashboard from "./pages/admin/Dashboard.jsx";
+import ServiceSelection from "./pages/customer/ServiceSelection.jsx";
+import EmployeeSelection from "./pages/customer/EmployeeSelection.jsx";
+import Feedback from "./pages/customer/Feedback.jsx";
+import ThankYou from "./pages/customer/ThankYou.jsx";
+import Employees from "./pages/admin/Employees.jsx";
+import Customers from "./pages/admin/Customers.jsx";
+import Services from "./pages/admin/Services.jsx";
+import Categories from "./pages/admin/Categories.jsx";
+import Reports from "./pages/admin/Reports.jsx";
+import Analytics from "./pages/admin/Analytics.jsx";
+import Settings from "./pages/admin/Settings.jsx";
+import Feedbacks from "./pages/admin/Feedbacks.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -16,12 +28,55 @@ function App() {
         <Route element={<CustomerLayout />}>
           <Route path="/" element={<Welcome />} />
           <Route path="/customer-info" element={<CustomerInfo />} />
+          <Route path="/service-selection" element={<ServiceSelection />} />
+          <Route path="/employee-selection" element={<EmployeeSelection />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/thankyou" element={<ThankYou />} />
         </Route>
 
         {/* Admin */}
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
+           <Route
+            path="employees"
+            element={<Employees />}
+          />
+
+          <Route
+            path="customers"
+            element={<Customers />}
+          />
+
+          <Route
+            path="services"
+            element={<Services />}
+          />
+
+          <Route
+            path="categories"
+            element={<Categories />}
+          />
+
+          <Route
+            path="feedback"
+            element={<Feedbacks />}
+          />
+
+          <Route
+            path="reports"
+            element={<Reports />}
+          />
+
+          <Route
+            path="analytics"
+            element={<Analytics />}
+          />
+
+          <Route
+            path="settings"
+            element={<Settings />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

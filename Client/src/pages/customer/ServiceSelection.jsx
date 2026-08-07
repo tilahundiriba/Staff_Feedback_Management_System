@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   Briefcase,
@@ -46,6 +47,7 @@ const services = [
   },
 ];
 const ServiceSelection = () => {
+    const navigate = useNavigate();
  const [selected, setSelected] = useState("Account Opening");
 
   return (
@@ -96,11 +98,13 @@ const ServiceSelection = () => {
 
         <div className="flex justify-between mt-10">
 
-          <button className="border px-6 py-3 rounded-lg hover:bg-gray-100">
+          <button className="border px-6 py-3 rounded-lg hover:bg-gray-100"
+          onClick={() => navigate("/customer-info")}>
             Back
           </button>
 
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
+          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700"
+          onClick={() => navigate("/employee-selection")}>
             Next
           </button>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Star } from "lucide-react";
 
@@ -14,6 +15,7 @@ const categories = [
 ];
 
 const Feedback = () => {
+  const navigate = useNavigate();
   const [ratings, setRatings] = useState({});
 
   const rate = (category, value) => {
@@ -84,11 +86,14 @@ const Feedback = () => {
 
         <div className="flex justify-between mt-8">
 
-          <button className="border px-6 py-2 rounded-lg">
+          <button className="border px-6 py-2 rounded-lg"
+          onClick={() => navigate("/employee-selection")}>
             Back
           </button>
 
-          <button className="bg-blue-600 text-white px-8 py-2 rounded-lg">
+          <button className="bg-blue-600 text-white px-8 py-2 rounded-lg"
+          onClick={() => navigate("/thankyou")}>
+
             Submit Feedback
           </button>
 

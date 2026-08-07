@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Search } from "lucide-react";
 
@@ -41,6 +42,7 @@ const employees = [
 ];
 
 const EmployeeSelection = () => {
+  const navigate = useNavigate();
    const [selected, setSelected] = useState(1);
 
   return (
@@ -117,11 +119,14 @@ const EmployeeSelection = () => {
 
         <div className="flex justify-between mt-8">
 
-          <button className="border rounded-lg px-6 py-2">
+          <button className="border rounded-lg px-6 py-2"
+          onClick={() => navigate("/service-selection")}>
             Back
           </button>
 
-          <button className="bg-blue-600 text-white rounded-lg px-8 py-2">
+          <button className="bg-blue-600 text-white rounded-lg px-8 py-2"
+          onClick={() => navigate("/feedback")}
+          >
             Next
           </button>
 

@@ -1,13 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 const Welcome = () => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-5">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-5 w-full">
+      <div className="w-full max-w-sm md:max-w-xl bg-white rounded-2xl shadow-xl p-8">
         {/* Logo */}
         <div className="flex items-center gap-3 justify-center">
           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-            <span className="text-blue-600 text-xl font-bold">⬢</span>
+            <img
+              src="../public/ADDIS_MESOB.jpg"
+              alt="Feedback"
+              className="w-60 rounded-full"
+            />
           </div>
 
           <h2 className="font-semibold text-gray-800 text-lg">
@@ -32,12 +38,19 @@ const Welcome = () => {
         {/* Illustration */}
 
         <div className="my-10 flex justify-center">
-          <img src="../public/feedbackImg.png" alt="Feedback" className="w-60" />
+          <img
+            src="../public/feedbackImg.png"
+            alt="Feedback"
+            className="w-60"
+          />
         </div>
 
         {/* Button */}
 
-        <button className="w-full bg-blue-600 hover:bg-blue-700 duration-300 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2">
+        <button
+          className="w-full bg-blue-600 hover:bg-blue-700  duration-300 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2"
+          onClick={() => navigate("/customer-info")}
+        >
           Start Feedback
           {/* <ArrowRight size={24}/> */}
         </button>

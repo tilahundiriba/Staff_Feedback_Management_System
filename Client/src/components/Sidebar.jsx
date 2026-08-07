@@ -57,7 +57,7 @@ const menu = [
 ];
 const Sidebar = () => {
  return (
-    <aside className="w-72 bg-white shadow-lg flex flex-col">
+    <aside className="w-72 bg-slate-900  shadow-lg flex flex-col text-white">
 
       <div className="h-20 flex items-center justify-center border-b">
 
@@ -67,7 +67,7 @@ const Sidebar = () => {
 
       </div>
 
-      <nav className="flex-1 p-5 space-y-2">
+      <nav className="flex-1 p-5 space-y-2 text-white">
 
         {menu.map((item) => {
 

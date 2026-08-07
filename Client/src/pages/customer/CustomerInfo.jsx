@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const CustomerInfo = () => {
+   const navigate = useNavigate();
  const [customerType, setCustomerType] = useState("Individual");
 
   return (
@@ -92,7 +94,8 @@ const CustomerInfo = () => {
             Cancel
           </button>
 
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
+          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700"
+          onClick={() => navigate("/service-selection")}>
             Next
           </button>
 
