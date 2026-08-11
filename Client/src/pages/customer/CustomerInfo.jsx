@@ -20,26 +20,28 @@ const CustomerInfo = () => {
         <div className="mt-8 space-y-5">
           <div>
             <label className="font-medium">
-              {t("fullName")} <span className="text-red-500">*</span>
+              {t("selectAgeCategory")} <span className="text-red-500">*</span>
             </label>
 
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              className="mt-2 w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          
+             <select className="w-full border rounded-xl p-3 mt-2">
+              <option>18-25</option>
+              <option>26-35</option>
+              <option>36-45</option>
+              <option>46 And Above</option>
+            </select>
           </div>
 
           <div>
             <label className="font-medium">
-              {t("phoneNumber")} <span className="text-red-500">*</span>
+             {t("selectGender")} <span className="text-red-500">*</span>
             </label>
 
-            <input
-              type="text"
-              placeholder="Enter your phone number"
-              className="mt-2 w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
-            />
+           <select className="w-full border rounded-xl p-3 mt-2">
+              <option>{t("male")}</option>
+              <option>{t("female")}</option>
+             
+            </select>
           </div>
 
           <div>

@@ -2,8 +2,10 @@ import { Outlet } from "react-router-dom";
 // import Footer from "../components/layout/Footer";
 import LanguageSelector from "../components/LanguageSelector.jsx";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 function CustomerLayout() {
-   const { t } = useTranslation();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <div className="w-full min-h-screen bg-slate-100 flex flex-col">
       {/* Header */}
@@ -19,6 +21,7 @@ function CustomerLayout() {
             lg:px-8
             py-3
             sm:py-4
+            flex justify-between
           "
         >
           <div
@@ -80,12 +83,19 @@ function CustomerLayout() {
                   md:text-base
                 "
               >
-             
                 {t("staffFeedbackSystem")}
               </p>
-              <LanguageSelector />
+              
             </div>
+            <LanguageSelector />
+           
           </div>
+           <button
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
         </div>
       </header>
 

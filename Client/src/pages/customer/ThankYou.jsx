@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 const ThankYou = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen w-full bg-slate-100 flex items-center justify-center px-4 py-6 sm:px-6 md:px-8">
 
@@ -54,7 +56,7 @@ const ThankYou = () => {
             mt-6
             sm:mt-8
           ">
-          Thank You!
+          {t("thankYou")}
         </h1>
 
         <p    className="
@@ -66,7 +68,8 @@ const ThankYou = () => {
             mt-3
             sm:mt-4
           ">
-          Your feedback has been submitted successfully.
+          
+          {t("feedbackSubmitted")}
         </p>
 
         <div           className="
@@ -89,7 +92,8 @@ const ThankYou = () => {
             mt-5
             sm:mt-6
           ">
-          Your opinion helps us improve our services.
+        
+          {t("yourOpinionHelps")}
         </p>
 
         <button  className="
@@ -111,7 +115,8 @@ const ThankYou = () => {
             duration-200
           "
         onClick={() => navigate("/")}>
-          Finish
+         
+          {t("finish")}
         </button>
 
       </div>

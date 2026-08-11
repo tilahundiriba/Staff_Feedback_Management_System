@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+
 
 import { useState } from "react";
 import {
@@ -36,6 +38,7 @@ const employees = [
 ];
 
 function Employees() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
   const filteredEmployees = employees.filter((employee) =>
@@ -57,7 +60,8 @@ function Employees() {
           </p>
         </div>
 
-        <button className="bg-blue-600 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-700">
+        <button className="bg-blue-600 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-700"
+        onClick={() => navigate("/admin/addEmployees")}>
           <Plus size={20} />
           Add Employee
         </button>

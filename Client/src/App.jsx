@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./i18n/i18n.js";
 import CustomerLayout from "./layouts/CustomerLayout.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
-
+import AddEmployee from "./pages/admin/AddEmployee.jsx";
 import Welcome from "./pages/customer/Welcome.jsx";
 import CustomerInfo from "./pages/customer/CustomerInfo.jsx";
 import Dashboard from "./pages/admin/Dashboard.jsx";
@@ -40,7 +40,7 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="employees" element={<Employees />} />
-
+          <Route path="addEmployees" element={<AddEmployee />} />
           <Route path="customers" element={<Customers />} />
 
           <Route path="services" element={<Services />} />

@@ -12,11 +12,12 @@ const resources = {
       customerInformation: "Customer Information",
       customerInformationDescription: "Please provide your details",
 
-      fullName: "Full Name",
-      phoneNumber: "Phone Number",
+     selectAgeCategory: "Select Your Age Category",
+     selectGender: "Select Your Gender",
       email: "Email",
       customerType: "Customer Type",
-
+male: "Male",
+female: "Female",
       individual: "Individual",
       business: "Business",
       visitor: "Visitor",
@@ -45,6 +46,7 @@ const resources = {
       writeComments: "Write your comments...",
       thankYou: "Thank You!",
       feedbackSubmitted: "Your feedback has been submitted successfully.",
+      yourOpinionHelps: "Your opinion helps us improve our services.",
       finish: "Finish",
       thankYouForTakingTime: "Thank you for taking the time!",
       staffFeedbackSystem: "Staff Feedback Management System",
@@ -61,11 +63,12 @@ const resources = {
       customerInformation: "የደንበኛ መረጃ",
       customerInformationDescription: "እባክዎ መረጃዎን ያስገቡ",
 
-      fullName: "ሙሉ ስም",
-      phoneNumber: "ስልክ ቁጥር",
+     selectAgeCategory: "የዕድሜ ምድብዎን ይምረጡ",
+     selectGender: "ጾታዎን ይምረጡ",
       email: "ኢሜይል",
       customerType: "የደንበኛ አይነት",
-
+male: "ወንድ",
+female: "ሴት",
       individual: "ግለሰብ",
       business: "ንግድ",
       visitor: "ጎብኚ",
@@ -94,6 +97,7 @@ const resources = {
 
       thankYou: "እናመሰግናለን!",
       feedbackSubmitted: "አስተያየትዎ በተሳካ ሁኔታ ተልኳል።",
+      yourOpinionHelps: "አስተያየትዎ አገልግሎታችንን ለማሻሻል ይረዳናል።",
       thankYouForTakingTime: "ጊዜዎን ስለሰጡን እናመሰግናለን!",
       staffFeedbackSystem: "የሰራተኞች አስተያየት አስተዳደር ስርዓት",
       finish: "ጨርስ",
@@ -111,11 +115,12 @@ const resources = {
       customerInformation: "Odeeffannoo Maamilaa",
       customerInformationDescription: "Mee odeeffannoo keessan galchaa",
 
-      fullName: "Maqaa Guutuu",
-      phoneNumber: "Lakkoofsa Bilbila",
+     selectAgeCategory: "Ramaddii umurii keessanii filadhaa",
+     selectGender: "Saala keessan filadhaa",
       email: "Imeelii",
       customerType: "Gosa Maamilaa",
-
+male: "Dhiira",
+female: "Dhalaa",
       individual: "Dhuunfaa",
       business: "Daldala",
       visitor: "Daaw'ataa",
@@ -145,6 +150,7 @@ const resources = {
 
       thankYou: "Galatoomaa!",
       feedbackSubmitted: "Yaadni keessan milkaa'inaan ergameera.",
+      yourOpinionHelps: "Yaadni keessan tajaajila keenya fooyyeessuuf nu gargaara.",
       thankYouForTakingTime: "Yeroo keessan waan nuuf kennitaniif galatoomaa!",
       staffFeedbackSystem: "Sirna Bulchiinsa Yaada Hojjettootaa",
       finish: "Xumuri",
