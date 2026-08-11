@@ -1,7 +1,9 @@
 import { Outlet } from "react-router-dom";
 // import Footer from "../components/layout/Footer";
-
+import LanguageSelector from "../components/LanguageSelector.jsx";
+import { useTranslation } from "react-i18next";
 function CustomerLayout() {
+   const { t } = useTranslation();
   return (
     <div className="w-full min-h-screen bg-slate-100 flex flex-col">
       {/* Header */}
@@ -78,8 +80,10 @@ function CustomerLayout() {
                   md:text-base
                 "
               >
-                Staff Feedback Management System
+             
+                {t("staffFeedbackSystem")}
               </p>
+              <LanguageSelector />
             </div>
           </div>
         </div>

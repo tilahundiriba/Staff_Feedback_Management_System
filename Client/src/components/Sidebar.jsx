@@ -57,7 +57,7 @@ const menu = [
 ];
 const Sidebar = () => {
  return (
-    <aside className="w-72 bg-slate-900  shadow-lg flex flex-col text-white">
+    <aside className="w-72 bg-slate-900  shadow-lg flex flex-col ">
 
       <div className="h-20 flex items-center justify-center border-b">
 
@@ -78,7 +78,7 @@ const Sidebar = () => {
               key={item.title}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-4 px-4 py-3 rounded-xl transition ${
+                `flex items-center gap-4 px-4 py-3 rounded-xl transition text-white ${
                   isActive
                     ? "bg-blue-600 text-white"
                     : "hover:bg-gray-100 text-gray-700"

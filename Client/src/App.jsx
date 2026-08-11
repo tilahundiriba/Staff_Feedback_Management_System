@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import "./i18n/i18n.js";
 import CustomerLayout from "./layouts/CustomerLayout.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 
@@ -19,6 +19,7 @@ import Reports from "./pages/admin/Reports.jsx";
 import Analytics from "./pages/admin/Analytics.jsx";
 import Settings from "./pages/admin/Settings.jsx";
 import Feedbacks from "./pages/admin/Feedbacks.jsx";
+import Login from "./pages/auth/Login.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -35,48 +36,24 @@ function App() {
         </Route>
 
         {/* Admin */}
-
+        <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
-           <Route
-            path="employees"
-            element={<Employees />}
-          />
+          <Route path="employees" element={<Employees />} />
 
-          <Route
-            path="customers"
-            element={<Customers />}
-          />
+          <Route path="customers" element={<Customers />} />
 
-          <Route
-            path="services"
-            element={<Services />}
-          />
+          <Route path="services" element={<Services />} />
 
-          <Route
-            path="categories"
-            element={<Categories />}
-          />
+          <Route path="categories" element={<Categories />} />
 
-          <Route
-            path="feedback"
-            element={<Feedbacks />}
-          />
+          <Route path="feedback" element={<Feedbacks />} />
 
-          <Route
-            path="reports"
-            element={<Reports />}
-          />
+          <Route path="reports" element={<Reports />} />
 
-          <Route
-            path="analytics"
-            element={<Analytics />}
-          />
+          <Route path="analytics" element={<Analytics />} />
 
-          <Route
-            path="settings"
-            element={<Settings />}
-          />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

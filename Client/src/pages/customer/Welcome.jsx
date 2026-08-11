@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 const Welcome = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-5 w-full">
-      <div className="w-full max-w-sm md:max-w-xl bg-white rounded-2xl shadow-xl p-8">
+      <div className="w-full max-w-sm md:max-w-xl bg-white rounded-2xl shadow-xl p-8  items-center justify-center ">
         {/* Logo */}
         <div className="flex items-center gap-3 justify-center">
           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
@@ -25,13 +27,12 @@ const Welcome = () => {
 
         <div className="mt-8 text-center">
           <h1 className="text-4xl font-bold text-blue-600 leading-tight">
-            We Value
-            <br />
-            Your Feedback
+           {t("welcome")}
           </h1>
 
           <p className="mt-4 text-gray-500 text-sm leading-6">
-            Your feedback helps us improve our services and serve you better.
+            {t("feedbackDescription")}
+            
           </p>
         </div>
 
@@ -48,17 +49,17 @@ const Welcome = () => {
         {/* Button */}
 
         <button
-          className="w-full bg-blue-600 hover:bg-blue-700  duration-300 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2"
+          className="w-full  bg-blue-600 hover:bg-blue-700  duration-300 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2"
           onClick={() => navigate("/customer-info")}
         >
-          Start Feedback
+         {t("startFeedback")}
           {/* <ArrowRight size={24}/> */}
         </button>
 
         {/* Footer */}
 
         <p className="mt-8 text-center text-gray-400 text-sm">
-          Thank you for taking the time!
+          {t("thankYouForTakingTime")}
         </p>
       </div>
     </div>

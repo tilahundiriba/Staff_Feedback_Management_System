@@ -53,7 +53,7 @@ const ServiceSelection = () => {
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-5">
 
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+      <div className="w-full max-w-md md:max-w-4xl bg-white rounded-2xl shadow-lg p-8">
 
         <h2 className="text-2xl font-bold">
           Service Selection

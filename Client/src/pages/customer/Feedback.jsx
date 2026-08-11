@@ -2,22 +2,22 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Star } from "lucide-react";
-
+import { useTranslation } from "react-i18next";
 const categories = [
-  "Friendliness",
-  "Communication",
-  "Professionalism",
-  "Knowledge",
-  "Response Time",
-  "Problem Solving",
-  "Respect",
-  "Overall Satisfaction",
+  "friendliness",
+  "communication",
+  "professionalism",
+  "knowledge",
+  "responseTime",
+  "problemSolving",
+  "respect",
+  "overallSatisfaction",
 ];
 
 const Feedback = () => {
   const navigate = useNavigate();
   const [ratings, setRatings] = useState({});
-
+const { t } = useTranslation();
   const rate = (category, value) => {
     setRatings({
       ...ratings,
@@ -28,14 +28,16 @@ const Feedback = () => {
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-center p-5">
 
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-lg">
+      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-lg md:max-w-4xl">
 
         <h2 className="text-2xl font-bold">
-          Rate Your Experience
+         
+          {t("rateExperience")}
         </h2>
 
         <p className="text-gray-500 mb-8">
-          Please rate the following categories
+        
+          {t("rateCategories")}
         </p>
 
         {categories.map((category) => (
@@ -45,7 +47,7 @@ const Feedback = () => {
             className="flex justify-between items-center mb-5"
           >
 
-            <span>{category}</span>
+            <span>{t(category)}</span>
 
             <div className="flex gap-1">
 
@@ -73,12 +75,13 @@ const Feedback = () => {
         <div className="mt-6">
 
           <label className="font-medium">
-            Additional Comments
+          
+            {t("additionalComments")}
           </label>
 
           <textarea
             rows="4"
-            placeholder="Write your comments..."
+            placeholder={t("writeComments")}
             className="w-full mt-2 border rounded-lg p-3"
           />
 
@@ -88,13 +91,14 @@ const Feedback = () => {
 
           <button className="border px-6 py-2 rounded-lg"
           onClick={() => navigate("/employee-selection")}>
-            Back
+            {t("back")}
           </button>
 
           <button className="bg-blue-600 text-white px-8 py-2 rounded-lg"
           onClick={() => navigate("/thankyou")}>
-
-            Submit Feedback
+{t("submitFeedback")}
+            
+            
           </button>
 
         </div>

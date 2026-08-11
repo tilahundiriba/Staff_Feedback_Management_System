@@ -10,7 +10,7 @@ const ThankYou = () => {
           w-full
           max-w-xs
           sm:max-w-sm
-          md:max-w-md
+          md:max-w-4xl
           bg-white
           rounded-2xl
           shadow-lg
@@ -96,6 +96,7 @@ const ThankYou = () => {
             mt-7
             sm:mt-10
             w-full
+            md:w-md
             bg-blue-600
             hover:bg-blue-700
             active:bg-blue-800

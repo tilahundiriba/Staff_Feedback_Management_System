@@ -47,7 +47,7 @@ const EmployeeSelection = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-center p-5">
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md md:max-w-4xl">
 
         <h2 className="text-2xl font-bold">Employee Selection</h2>
 
