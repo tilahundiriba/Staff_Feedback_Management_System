@@ -1,127 +1,250 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 
-import { Search, Star } from "lucide-react";
-import { useState } from "react";
-
-const feedbackData = [
-  {
-    customer: "Abebe Kebede",
-    employee: "John Doe",
-    service: "Account Opening",
-    rating: 5,
-    comment: "Excellent service and very helpful.",
-    date: "Aug 7, 2026",
-  },
-  {
-    customer: "Sara Ahmed",
-    employee: "Jane Smith",
-    service: "Customer Support",
-    rating: 4,
-    comment: "Very professional service.",
-    date: "Aug 6, 2026",
-  },
-  {
-    customer: "Michael Brown",
-    employee: "David Ali",
-    service: "Claim Processing",
-    rating: 5,
-    comment: "My problem was solved quickly.",
-    date: "Aug 5, 2026",
-  },
-];
-
-function Feedbacks() {
+function Feedback() {
+  const [feedback, setFeedback] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const filtered = feedbackData.filter(
-    (item) =>
-      item.customer.toLowerCase().includes(search.toLowerCase()) ||
-      item.employee.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/feedback"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch feedback");
+        }
+
+        const data = await response.json();
+
+        setFeedback(data);
+      } catch (error) {
+        console.error(error);
+        setError("Unable to load feedback");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeedback();
+  }, []);
+
+  // Search
+  const filteredFeedback = feedback.filter((item) => {
+    const searchText = search.toLowerCase();
+
+    return (
+  String(item.feedback_id ?? "")
+      .toLowerCase()
+      .includes(searchText) ||
+
+    String(item.employee_name ?? "")
+      .toLowerCase()
+      .includes(searchText) ||
+
+    String(item.customer_id ?? "")
+      .toLowerCase()
+      .includes(searchText) ||
+
+    String(item.service_name ?? "")
+      .toLowerCase()
+      .includes(searchText) ||
+
+    String(item.category_name ?? "")
+      .toLowerCase()
+      .includes(searchText) ||
+
+    String(item.comment ?? "")
+      .toLowerCase()
+      .includes(searchText)
+    );
+  });
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center">
+        <p className="text-gray-500">
+          Loading feedback...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-6">
+        <div className="bg-red-50 text-red-600 p-4 rounded-lg">
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
+    <div className="w-full p-4 sm:p-6">
 
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
           Feedback
         </h1>
 
-        <p className="text-gray-500">
-          Review customer feedback and ratings
+        <p className="text-gray-500 mt-1">
+          View customer feedback
         </p>
       </div>
 
-      <div className="bg-white p-4 rounded-2xl border">
+      {/* Search */}
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search feedback..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full sm:max-w-md border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
-        <div className="relative max-w-md">
+      {/* Desktop Table */}
+      <div className="hidden lg:block bg-white rounded-xl shadow-sm overflow-x-auto">
 
-          <Search
-            size={20}
-            className="absolute left-3 top-3 text-gray-400"
-          />
+        <table className="w-full">
 
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search feedback..."
-            className="w-full border rounded-xl p-3 pl-10"
-          />
+          <thead className="bg-gray-50">
+            <tr>
 
-        </div>
+              <th className="text-left px-5 py-4">
+                Feedback ID
+              </th>
+
+              <th className="text-left px-5 py-4">
+                Employee
+              </th>
+
+              <th className="text-left px-5 py-4">
+                Customer ID
+              </th>
+
+              <th className="text-left px-5 py-4">
+                Service
+              </th>
+
+              <th className="text-left px-5 py-4">
+                Category
+              </th>
+
+              <th className="text-left px-5 py-4">
+                Rating
+              </th>
+
+              <th className="text-left px-5 py-4">
+                Comment
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody className="divide-y">
+
+            {filteredFeedback.map((item) => (
+
+              <tr key={item.feedback_id}>
+
+                <td className="px-5 py-4 text-blue-600 font-medium">
+                  {item.feedback_id}
+                </td>
+
+                <td className="px-5 py-4">
+                  {item.employee_name}
+                </td>
+
+                <td className="px-5 py-4">
+                  {item.customer_id}
+                </td>
+
+                <td className="px-5 py-4">
+                  {item.service_name}
+                </td>
+
+                <td className="px-5 py-4">
+                  {item.category_name}
+                </td>
+
+                <td className="px-5 py-4">
+                  <span className="text-yellow-500">
+                    {"★".repeat(item.rating)}
+                  </span>
+                </td>
+
+                <td className="px-5 py-4 max-w-xs">
+                  {item.comment}
+                </td>
+
+              </tr>
+
+            ))}
+
+          </tbody>
+
+        </table>
 
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      {/* Mobile Cards */}
+      <div className="lg:hidden space-y-4">
 
-        {filtered.map((item, index) => (
+        {filteredFeedback.map((item) => (
 
           <div
-            key={index}
-            className="bg-white border rounded-2xl p-5 shadow-sm"
+            key={item.feedback_id}
+            className="bg-white rounded-xl shadow-sm p-5"
           >
 
-            <div className="flex flex-col sm:flex-row justify-between gap-3">
+            <div className="flex justify-between gap-3">
 
               <div>
 
-                <h3 className="font-semibold">
-                  {item.customer}
-                </h3>
+                <h2 className="font-semibold text-gray-800">
+                  {item.employee_name}
+                </h2>
 
-                <p className="text-sm text-gray-500">
-                  Served by {item.employee}
+                <p className="text-sm text-blue-600 mt-1">
+                  {item.feedback_id}
                 </p>
 
               </div>
 
-              <div className="flex items-center gap-1 text-yellow-500">
-
-                <Star size={18} fill="currentColor" />
-
-                <span>
-                  {item.rating}.0
-                </span>
-
-              </div>
-
-            </div>
-
-            <div className="mt-4">
-
-              <span className="text-sm bg-blue-50 text-blue-600 px-3 py-1 rounded-full">
-                {item.service}
+              <span className="text-yellow-500 whitespace-nowrap">
+                {"★".repeat(item.rating)}
               </span>
 
             </div>
 
-            <p className="text-gray-600 mt-4">
-              "{item.comment}"
-            </p>
+            <div className="mt-4 space-y-2 text-sm">
 
-            <p className="text-xs text-gray-400 mt-4">
-              {item.date}
-            </p>
+              <p>
+                <strong>Customer ID:</strong>{" "}
+                {item.customer_id}
+              </p>
+
+              <p>
+                <strong>Service:</strong>{" "}
+                {item.service_name}
+              </p>
+
+              <p>
+                <strong>Category:</strong>{" "}
+                {item.category_name}
+              </p>
+
+              <p className="text-gray-600">
+                <strong>Comment:</strong>{" "}
+                {item.comment}
+              </p>
+
+            </div>
 
           </div>
 
@@ -129,8 +252,17 @@ function Feedbacks() {
 
       </div>
 
+      {/* Empty state */}
+      {filteredFeedback.length === 0 && (
+        <div className="bg-white rounded-xl p-10 text-center">
+          <p className="text-gray-500">
+            No feedback found.
+          </p>
+        </div>
+      )}
+
     </div>
   );
 }
 
-export default Feedbacks;
+export default Feedback;

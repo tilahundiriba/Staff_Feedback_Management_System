@@ -1,120 +1,163 @@
 import React from 'react'
 
-
+import { useEffect, useState } from "react";
 import { Search, Users } from "lucide-react";
-import { useState } from "react";
 
-const customers = [
-  {
-    name: "Abebe Kebede",
-    phone: "+251 911 123456",
-    email: "abebe@example.com",
-    type: "Individual",
-    feedback: 5,
-  },
-  {
-    name: "Sara Ahmed",
-    phone: "+251 922 456789",
-    email: "sara@example.com",
-    type: "Business",
-    feedback: 4,
-  },
-  {
-    name: "Michael Brown",
-    phone: "+251 933 987654",
-    email: "michael@example.com",
-    type: "Individual",
-    feedback: 5,
-  },
-];
+
+
 
 function Customers() {
+  const [customers, setCustomers] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const filtered = customers.filter((customer) =>
-    customer.name.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/customers"
+        );
+
+        const data = await response.json();
+
+        setCustomers(data);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, []);
+
+  const filteredCustomers = customers.filter((customer) => {
+    const searchText = search.toLowerCase();
+
+    return (
+      customer.customer_id?.toLowerCase().includes(searchText) ||
+      customer.full_name?.toLowerCase().includes(searchText) ||
+      customer.phone?.toLowerCase().includes(searchText) ||
+      customer.email?.toLowerCase().includes(searchText) ||
+      customer.customer_type?.toLowerCase().includes(searchText)
+    );
+  });
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center">
+        Loading customers...
+      </div>
+    );
+  }
+
 
   return (
-    <div className="space-y-6">
-
-      <div>
+   <div className="w-full p-4 sm:p-6">
+      <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold">
           Customers
         </h1>
 
-        <p className="text-gray-500">
-          View customers and their feedback history
+        <p className="text-gray-500 mt-1">
+          View customer information
         </p>
       </div>
 
-      <div className="bg-white p-4 rounded-2xl border">
-
-        <div className="relative max-w-md">
-
-          <Search
-            size={20}
-            className="absolute left-3 top-3 text-gray-400"
-          />
-
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search customers..."
-            className="w-full border rounded-xl p-3 pl-10"
-          />
-
-        </div>
-
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search customers..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full sm:max-w-md border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-x-auto">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="text-left px-6 py-4">ID</th>
+              <th className="text-left px-6 py-4">Name</th>
+              <th className="text-left px-6 py-4">Phone</th>
+              <th className="text-left px-6 py-4">Email</th>
+              <th className="text-left px-6 py-4">Type</th>
+              <th className="text-left px-6 py-4">Age</th>
+              <th className="text-left px-6 py-4">Gender</th>
+            </tr>
+          </thead>
 
-        {filtered.map((customer) => (
+          <tbody className="divide-y">
+            {filteredCustomers.map((customer) => (
+              <tr key={customer.customer_id}>
+                <td className="px-6 py-4 text-blue-600 font-medium">
+                  {customer.customer_id}
+                </td>
 
+                <td className="px-6 py-4">
+                  {customer.email}
+                </td>
+
+                <td className="px-6 py-4">
+                  {customer.customer_type}
+                </td>
+
+                <td className="px-6 py-4">
+                  {customer.age_category}
+                </td>
+
+                <td className="px-6 py-4">
+                  {customer.gender}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="md:hidden space-y-4">
+        {filteredCustomers.map((customer) => (
           <div
-            key={customer.email}
-            className="bg-white border rounded-2xl p-5 shadow-sm"
+            key={customer.customer_id}
+            className="bg-white rounded-xl shadow-sm p-5"
           >
-
-            <div className="flex items-center gap-3">
-
-              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                <Users className="text-blue-600" />
-              </div>
-
+            <div className="flex justify-between">
               <div>
-                <h3 className="font-semibold">
-                  {customer.name}
-                </h3>
+                <h2 className="font-semibold">
+                  {customer.full_name}
+                </h2>
 
-                <p className="text-sm text-gray-500">
-                  {customer.type}
+                <p className="text-sm text-blue-600">
+                  {customer.customer_id}
                 </p>
               </div>
-
             </div>
 
-            <div className="mt-5 space-y-2 text-sm">
-
-              <p>{customer.phone}</p>
-
-              <p className="text-gray-500">
-                {customer.email}
+            <div className="mt-4 space-y-2 text-sm text-gray-600">
+              <p>
+                <strong>Phone:</strong> {customer.phone}
               </p>
 
-              <p className="text-yellow-500">
-                ★ {customer.feedback} Rating
+              <p>
+                <strong>Email:</strong> {customer.email}
               </p>
 
+              <p>
+                <strong>Type:</strong> {customer.customer_type}
+              </p>
+
+              <p>
+                <strong>Age:</strong> {customer.age_category}
+              </p>
+
+              <p>
+                <strong>Gender:</strong> {customer.gender}
+              </p>
             </div>
-
           </div>
-
         ))}
-
       </div>
-
     </div>
   );
 }

@@ -1,113 +1,162 @@
 import React from 'react'
+import { useEffect, useState } from "react";
 import {
   Folder,
   Plus,
   MoreVertical,
 } from "lucide-react";
 
-const categories = [
-  {
-    name: "Customer Service",
-    description: "Services related to customer assistance",
-    services: 5,
-    feedback: 650,
-  },
-  {
-    name: "Insurance",
-    description: "Insurance related services",
-    services: 8,
-    feedback: 430,
-  },
-  {
-    name: "Support",
-    description: "Customer support and assistance",
-    services: 4,
-    feedback: 510,
-  },
-];
 
 function Categories() {
-  return (
-    <div className="space-y-6">
 
-      <div className="flex flex-col sm:flex-row justify-between gap-4">
+   const [categories, setCategories] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">
-            Categories
-          </h1>
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/categories"
+        );
 
-          <p className="text-gray-500">
-            Organize your organization's services
-          </p>
-        </div>
+        const data = await response.json();
 
+        setCategories(data);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const filteredCategories = categories.filter((category) => {
+    const searchText = search.toLowerCase();
+
+    return (
+      category.category_id?.toLowerCase().includes(searchText) ||
+      category.category_name?.toLowerCase().includes(searchText) ||
+      category.description?.toLowerCase().includes(searchText)
+    );
+  });
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center">
+        Loading categories...
+      </div>
+    );
+  }
+  <button className="bg-blue-600 text-white px-5 py-3 rounded-xl flex items-center justify-center gap-2">
+          <Plus size={20} />
+          Add Category
+        </button>
+ return (
+    <div className="w-full p-4 sm:p-6">
+      <div className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold">
+          Categories
+        </h1>
+
+        <p className="text-gray-500 mt-1">
+          Manage feedback categories
+        </p>
+      </div>
+
+      <div className="flex justify-between mb-6">
+        <input
+          type="text"
+          placeholder="Search categories..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full sm:max-w-md border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
         <button className="bg-blue-600 text-white px-5 py-3 rounded-xl flex items-center justify-center gap-2">
           <Plus size={20} />
           Add Category
         </button>
-
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="text-left px-6 py-4">ID</th>
+              <th className="text-left px-6 py-4">Category</th>
+              <th className="text-left px-6 py-4">Description</th>
+              <th className="text-left px-6 py-4">Status</th>
+            </tr>
+          </thead>
 
-        {categories.map((category) => (
+          <tbody className="divide-y">
+            {filteredCategories.map((category) => (
+              <tr key={category.category_id}>
+                <td className="px-6 py-4 text-blue-600 font-medium">
+                  {category.category_id}
+                </td>
 
+                <td className="px-6 py-4 font-medium">
+                  {category.category_name}
+                </td>
+
+                <td className="px-6 py-4 text-gray-600">
+                  {category.description}
+                </td>
+
+                <td className="px-6 py-4">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs ${
+                      category.status
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {category.status ? "Active" : "Inactive"}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="md:hidden space-y-4">
+        {filteredCategories.map((category) => (
           <div
-            key={category.name}
-            className="bg-white border rounded-2xl p-5 shadow-sm"
+            key={category.category_id}
+            className="bg-white rounded-xl shadow-sm p-5"
           >
-
             <div className="flex justify-between">
+              <div>
+                <h2 className="font-semibold">
+                  {category.category_name}
+                </h2>
 
-              <div className="bg-blue-50 p-3 rounded-xl">
-                <Folder className="text-blue-600" />
+                <p className="text-sm text-blue-600">
+                  {category.category_id}
+                </p>
               </div>
 
-              <button>
-                <MoreVertical />
-              </button>
-
+              <span
+                className={`h-fit px-3 py-1 rounded-full text-xs ${
+                  category.status
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
+              >
+                {category.status ? "Active" : "Inactive"}
+              </span>
             </div>
 
-            <h3 className="font-semibold text-lg mt-5">
-              {category.name}
-            </h3>
-
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-600 mt-4">
               {category.description}
             </p>
-
-            <div className="grid grid-cols-2 gap-3 mt-5">
-
-              <div className="bg-gray-50 rounded-xl p-3">
-                <p className="text-xs text-gray-500">
-                  Services
-                </p>
-
-                <p className="font-bold text-lg">
-                  {category.services}
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-3">
-                <p className="text-xs text-gray-500">
-                  Feedback
-                </p>
-
-                <p className="font-bold text-lg">
-                  {category.feedback}
-                </p>
-              </div>
-
-            </div>
-
           </div>
-
         ))}
-
       </div>
-
     </div>
   );
 }

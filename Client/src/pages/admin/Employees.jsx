@@ -1,8 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Plus,
   Search,
@@ -10,41 +8,84 @@ import {
   Users,
 } from "lucide-react";
 
-const employees = [
-  {
-    id: 1,
-    name: "John Doe",
-    department: "Customer Service",
-    position: "Customer Service Officer",
-    status: "Active",
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    department: "Operations",
-    position: "Senior Officer",
-    status: "Active",
-    rating: 4.6,
-  },
-  {
-    id: 3,
-    name: "David Ali",
-    department: "Customer Support",
-    position: "Support Specialist",
-    status: "Active",
-    rating: 4.5,
-  },
-];
+
 
 function Employees() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+ const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const filteredEmployees = employees.filter((employee) =>
-    employee.name.toLowerCase().includes(search.toLowerCase())
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/employees");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch employees");
+        }
+
+        const data = await response.json();
+
+        setEmployees(data);
+      } catch (error) {
+        console.error(error);
+        setError("Unable to load employees");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center">
+        <p className="text-gray-500">Loading employees...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-6">
+        <div className="bg-red-50 text-red-600 p-4 rounded-lg">
+          {error}
+        </div>
+      </div>
+    );
+  }
+  const filteredEmployees = employees.filter((employee) => {
+  const searchText = search.toLowerCase();
+
+  return (
+    `${employee.first_name} ${employee.last_name}`
+      .toLowerCase()
+      .includes(searchText) ||
+
+    employee.employee_id
+      ?.toLowerCase()
+      .includes(searchText) ||
+
+    employee.email
+      ?.toLowerCase()
+      .includes(searchText) ||
+
+    employee.phone
+      ?.toLowerCase()
+      .includes(searchText) ||
+
+    employee.position
+      ?.toLowerCase()
+      .includes(searchText) ||
+
+    employee.department
+      ?.toLowerCase()
+      .includes(searchText)
   );
-
+});
   return (
     <div className="w-full space-y-6">
 
@@ -94,71 +135,73 @@ function Employees() {
 
           <table className="w-full min-w-[800px]">
 
-            <thead className="bg-gray-50">
-
+          <thead className="bg-gray-50">
               <tr>
-                <th className="p-4 text-left">Employee</th>
-                <th className="p-4 text-left">Department</th>
-                <th className="p-4 text-left">Position</th>
-                <th className="p-4 text-left">Rating</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4"></th>
+                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  ID
+                </th>
+
+                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  Name
+                </th>
+
+                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  Position
+                </th>
+
+                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  Department
+                </th>
+
+                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  Phone
+                </th>
+
+                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  Status
+                </th>
               </tr>
-
             </thead>
-
-            <tbody>
-
+           
+            <tbody className="divide-y divide-gray-100">
               {filteredEmployees.map((employee) => (
-
-                <tr key={employee.id} className="border-t">
-
-                  <td className="p-4">
-
-                    <div className="flex items-center gap-3">
-
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                        <Users className="text-blue-600" size={18} />
-                      </div>
-
-                      <span className="font-medium">
-                        {employee.name}
-                      </span>
-
-                    </div>
-
+                <tr
+                  key={employee.employee_id}
+                  className="hover:bg-gray-50"
+                >
+                  <td className="px-6 py-4 font-medium text-blue-600">
+                    {employee.employee_id}
                   </td>
 
-                  <td className="p-4 text-gray-600">
-                    {employee.department}
+                  <td className="px-6 py-4 text-gray-800">
+                    {employee.first_name} {employee.last_name}
                   </td>
 
-                  <td className="p-4 text-gray-600">
+                  <td className="px-6 py-4 text-gray-600">
                     {employee.position}
                   </td>
 
-                  <td className="p-4 text-yellow-500">
-                    ★ {employee.rating}
+                  <td className="px-6 py-4 text-gray-600">
+                    {employee.department}
                   </td>
 
-                  <td className="p-4">
+                  <td className="px-6 py-4 text-gray-600">
+                    {employee.phone}
+                  </td>
 
-                    <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
-                      {employee.status}
+                  <td className="px-6 py-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        employee.status
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {employee.status ? "Active" : "Inactive"}
                     </span>
-
                   </td>
-
-                  <td className="p-4">
-                    <button>
-                      <MoreVertical />
-                    </button>
-                  </td>
-
                 </tr>
-
               ))}
-
             </tbody>
 
           </table>
