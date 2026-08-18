@@ -6,9 +6,8 @@ import {
   Search,
   MoreVertical,
   Users,
+  Eye
 } from "lucide-react";
-
-
 
 function Employees() {
   const navigate = useNavigate();
@@ -160,6 +159,9 @@ function Employees() {
                 <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
                   Status
                 </th>
+                 <th className="text-left px-6 py-4 text-sm font-semibold text-gray-600">
+                  Actions
+                </th>
               </tr>
             </thead>
            
@@ -200,6 +202,27 @@ function Employees() {
                       {employee.status ? "Active" : "Inactive"}
                     </span>
                   </td>
+                   <button
+                      onClick={() =>
+                        navigate(
+                          `/admin/employees/${employee.employee_id}/ratings`
+                        )
+                      }
+                      className="
+                        inline-flex
+                        items-center
+                        justify-center
+                        p-2
+                        rounded-lg
+                        text-blue-600
+                        hover:bg-blue-50
+                        transition
+                      "
+                      title="View employee ratings"
+                    >
+                      <Eye size={20} />
+                    </button>
+
                 </tr>
               ))}
             </tbody>

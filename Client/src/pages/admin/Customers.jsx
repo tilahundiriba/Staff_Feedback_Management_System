@@ -79,8 +79,7 @@ function Customers() {
           <thead className="bg-gray-50">
             <tr>
               <th className="text-left px-6 py-4">ID</th>
-              <th className="text-left px-6 py-4">Name</th>
-              <th className="text-left px-6 py-4">Phone</th>
+             
               <th className="text-left px-6 py-4">Email</th>
               <th className="text-left px-6 py-4">Type</th>
               <th className="text-left px-6 py-4">Age</th>

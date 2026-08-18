@@ -19,6 +19,7 @@ import Reports from "./pages/admin/Reports.jsx";
 import Analytics from "./pages/admin/Analytics.jsx";
 import Settings from "./pages/admin/Settings.jsx";
 import Feedbacks from "./pages/admin/Feedbacks.jsx";
+import EmployeeRatings from "./pages/admin/EmployeeRatings";
 import Login from "./pages/auth/Login.jsx";
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route path="employees" element={<Employees />} />
           <Route path="addEmployees" element={<AddEmployee />} />
           <Route path="customers" element={<Customers />} />
-
+          <Route path="employees/:id/ratings" element={<EmployeeRatings />} />
           <Route path="services" element={<Services />} />
 
           <Route path="categories" element={<Categories />} />

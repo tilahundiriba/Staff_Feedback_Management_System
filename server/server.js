@@ -22,10 +22,7 @@ app.use("/api/services", serviceRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/feedback", feedbackRoutes);
-app.use(
-  "/api/employee-ratings",
-  employeeRatingRoutes
-);
+app.use("/api/employee-ratings",employeeRatingRoutes);
 // Test route
 app.get("/", (req, res) => {
   res.json({
