@@ -38,7 +38,7 @@ function CustomerLayout() {
           >
             <img
               src="/ADDIS_MESOB.jpg"
-              alt="Addis Mesob Organization Logo"
+              alt="Addis Mesob Logo"
               className="
                 w-10 h-10
                 sm:w-11 sm:h-11
@@ -72,7 +72,8 @@ function CustomerLayout() {
                   whitespace-nowrap
                 "
               >
-                ADDIS MESOB Organization
+                ADDIS MESOB 
+                
               </h1>
               <span className="hidden sm:block text-gray-300">|</span>
               <p
